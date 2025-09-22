@@ -49,7 +49,9 @@ const PersonList = ({ people, onPersonEdit, onPersonDelete }) => {
                   {person.gender}
                 </td>
                 <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                  {person.enrolled_at}
+                  {person.enrolled_at
+                    ? new Date(person.enrolled_at).toLocaleDateString()
+                    : ""}
                 </td>
 
                 <td className="px-6 py-4 text-center">
