@@ -14,5 +14,5 @@ To run the client application:
 
 3. Create a `.env` file in the `/client` folder and change the following api url if not default:
    ```
-   VITE_BASE_API_URL = http://localhost:3000/api
+   VITE_BASE_API_URL = http://localhost:5064/api
    ```
