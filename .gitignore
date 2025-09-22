@@ -28,7 +28,6 @@ bld/
 
 # Docker file
 Dockerfile
-.dockerignore
 
 # .NET Core
 project.lock.json

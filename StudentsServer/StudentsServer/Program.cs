@@ -9,7 +9,7 @@ namespace StudentsServer
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            
             //cors
             var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -19,11 +19,9 @@ namespace StudentsServer
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                 policy =>
                 {
-                    // policy.WithOrigins("http://example.com", "http://www.contosoco.com");
-                    // policy.WithOrigins("*");
-                    //Please change it to your frontend local url 
-                    policy.WithOrigins("http://localhost:5173")
-                    .AllowAnyMethod() //if not mentioned only get will be allowed
+                    // Allow this Frontend App request APIs, set AllowAnyOrigin() if no any limits
+                    policy.WithOrigins("https://students-demo.fly.dev")
+                    .AllowAnyMethod()   //if not mentioned only get will be allowed
                     .AllowAnyHeader(); // x-pagination
                 });
             });
