@@ -10,6 +10,24 @@ namespace StudentsServer
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            //cors
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+            //cors
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                policy =>
+                {
+                    // policy.WithOrigins("http://example.com", "http://www.contosoco.com");
+                    // policy.WithOrigins("*");
+                    //Please change it to your frontend local url 
+                    policy.WithOrigins("http://localhost:5173")
+                    .AllowAnyMethod() //if not mentioned only get will be allowed
+                    .AllowAnyHeader(); // x-pagination
+                });
+            });
+
             // Add services to the container.
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -20,6 +38,7 @@ namespace StudentsServer
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+            app.UseCors(MyAllowSpecificOrigins);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
