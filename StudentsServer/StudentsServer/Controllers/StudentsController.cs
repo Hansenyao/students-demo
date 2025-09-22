@@ -2,6 +2,7 @@
 using StudentsServer.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace StudentsServer.Controllers
 {
@@ -20,24 +21,46 @@ namespace StudentsServer.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<student>>> GetStudents()
         {
-            return await _context.students.ToListAsync();
+            try
+            {
+                var students = await _context.students.ToListAsync();
+                return Ok(students);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         // GET: api/students/5
         [HttpGet("{id}")]
         public async Task<ActionResult<student>> GetStudent(int id)
         {
-            var student = await _context.students.FindAsync(id);
-            if (student == null) return NotFound();
-            return student;
+            try
+            {
+                var student = await _context.students.FindAsync(id);
+                if (student == null) return NotFound();
+                return student;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
         // POST: api/students
         [HttpPost]
         public async Task<ActionResult<student>> CreateStudent(student student)
         {
-            _context.students.Add(student);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetStudent), new { id = student.id }, student);
+            try
+            {
+                _context.students.Add(student);
+                await _context.SaveChangesAsync();
+                return CreatedAtAction(nameof(GetStudent), new { id = student.id }, student);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         // PUT: api/students/5
@@ -46,24 +69,36 @@ namespace StudentsServer.Controllers
         {
             if (id != student.id) return BadRequest();
 
-            _context.Entry(student).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            try
+            {
+                _context.Entry(student).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         // DELETE: api/students/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStudent(int id)
         {
-            var student = await _context.students.FindAsync(id);
-            if (student == null) return NotFound();
+            try
+            {
+                var student = await _context.students.FindAsync(id);
+                if (student == null) return NotFound();
 
-            _context.students.Remove(student);
-            await _context.SaveChangesAsync();
+                _context.students.Remove(student);
+                await _context.SaveChangesAsync();
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
-
     }
 }
