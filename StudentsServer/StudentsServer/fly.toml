@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for students-demo on 2025-09-21T22:10:21-06:00
+# fly.toml app configuration file generated for students-server on 2025-09-22T09:18:28-06:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'students-demo'
+app = 'students-server'
 primary_region = 'yyz'
 
 [build]
