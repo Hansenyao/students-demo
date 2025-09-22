@@ -20,7 +20,7 @@ public partial class student
     public int? age { get; set; }
 
     [MaxLength(1)]
-    public char gender { get; set; }
+    public string gender { get; set; }
 
     public DateOnly? enrolled_at { get; set; }
 }
