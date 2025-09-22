@@ -30,8 +30,11 @@ namespace StudentsServer
 
             app.UseAuthorization();
 
-
             app.MapControllers();
+
+            // Make sure using server's root path can return a message to 
+            // demonstrate server is running!
+            app.MapGet("/", () => "Server is running!");
 
             app.Run();
         }
