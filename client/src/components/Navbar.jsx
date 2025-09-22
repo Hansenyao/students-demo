@@ -55,7 +55,7 @@ const Navbar = () => {
                   }`
                 }
               >
-                Person
+                Student
               </NavLink>
             </div>
           </nav>
