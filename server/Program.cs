@@ -20,7 +20,8 @@ namespace StudentsServer
                 policy =>
                 {
                     // Allow this Frontend App request APIs, set AllowAnyOrigin() if no any limits
-                    policy.WithOrigins("https://students-demo.fly.dev")
+                    //policy.WithOrigins("https://students-demo.fly.dev")
+                    policy.AllowAnyMethod()
                     .AllowAnyMethod()   //if not mentioned only get will be allowed
                     .AllowAnyHeader(); // x-pagination
                 });
